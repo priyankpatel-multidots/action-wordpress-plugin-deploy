@@ -72,8 +72,8 @@ else
 	TMP_DIR="/github/archivetmp"
 	mkdir "$TMP_DIR"
 
-	git config --global user.email "10upbot+github@10up.com"
-	git config --global user.name "10upbot on GitHub"
+	git config --global user.email "priyank@gmail.com"
+	git config --global user.name "priyankpatel-multidots on GitHub"
 
 	# If there's no .gitattributes file, write a default one into place
 	if [[ ! -e "$GITHUB_WORKSPACE/.gitattributes" ]]; then
@@ -135,7 +135,7 @@ if ! $GENERATE_ZIP; then
   echo "Generating zip file..."
   cd "$SVN_DIR/trunk" || exit
   zip -r "${GITHUB_WORKSPACE}/${SLUG}.zip" .
-  echo "✓ Zip file generated!"
+  echo "Zip file generated!"
 fi
 
-echo "✓ Plugin deployed!"
+echo "Plugin deployed!"
