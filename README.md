@@ -74,7 +74,7 @@ jobs:
         npm install
         npm run build
     - name: WordPress Plugin Deploy
-      uses: priyankpatel-multidots/action-wordpress-plugin-deploy@stable
+      uses: priyankpatel-multidots/action-wordpress-plugin-deploy@master
       env:
         SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
         SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
@@ -100,7 +100,7 @@ jobs:
         npm run build
     - name: WordPress Plugin Deploy
       id: deploy
-      uses: priyankpatel-multidots/action-wordpress-plugin-deploy@stable
+      uses: priyankpatel-multidots/action-wordpress-plugin-deploy@master
       with:
         generate-zip: true
       env:
