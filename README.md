@@ -2,7 +2,7 @@
 
 This Action commits the contents of your Git tag to the WordPress.org plugin repository using the same tag name. It can exclude files as defined in either `.distignore` or `.gitattributes`, and moves anything from a `.wordpress-org` subdirectory to the top-level `assets` directory in Subversion (plugin banners, icons, and screenshots).
 
-### ☞ For updating the readme and items in the assets directory between releases, please see our [WordPress.org Plugin Readme/Assets Update Action]
+### For updating the readme and items in the assets directory between releases, please see our [WordPress.org Plugin Readme/Assets Update Action]
 
 ## Configuration
 
@@ -50,7 +50,6 @@ If there are files or directories to be excluded from deployment, such as tests 
 /.gitignore export-ignore
 ```
 
-
 ## Example Workflow Files
 
 To get started, you will want to copy the contents of one of these examples into `.github/workflows/deploy.yml` and push that to your repository. You are welcome to name the file something else.
@@ -80,48 +79,3 @@ jobs:
         SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
         SLUG: my-super-cool-plugin # optional, remove if GitHub repo name matches SVN slug, including capitalization
 ```
-
-### Deploy on publishing a new release and attach a ZIP file to the release
-```yml
-name: Deploy to WordPress.org
-on:
-  release:
-    types: [published]
-jobs:
-  tag:
-    name: New release
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-    - name: Build
-      run: |
-        npm install
-        npm run build
-    - name: WordPress Plugin Deploy
-      id: deploy
-      uses: priyankpatel-multidots/action-wordpress-plugin-deploy@master
-      with:
-        generate-zip: true
-      env:
-        SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
-        SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
-    - name: Upload release asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ github.event.release.upload_url }}
-        asset_path: ${{github.workspace}}/${{ github.event.repository.name }}.zip
-        asset_name: ${{ github.event.repository.name }}.zip
-        asset_content_type: application/zip
-```
-
-## Contributing
-Want to help? Check out our [contributing guidelines](CONTRIBUTING.md) to get started.
-
-## License
-
-Our GitHub Actions are available for use and remix under the MIT license.
-
-### ☞ Check out our [collection of WordPress-focused GitHub Actions]
